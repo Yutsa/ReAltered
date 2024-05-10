@@ -9,6 +9,7 @@ size = Vector2(222, 313)
 [node name="Card" type="Node2D"]
 position = Vector2(250, 250)
 script = ExtResource("1_ivecl")
+card_id = "card3"
 
 [node name="Area2D" type="Area2D" parent="."]
 

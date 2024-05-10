@@ -1,10 +1,12 @@
 extends Node2D
 
+@export var card_id = "card1"
 var mouse_over = false
 var is_dragging = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$Area2D/CardImage.texture = load("res://img/cards/" + card_id + ".jpg")
 	set_process_unhandled_input(true)
 
 
