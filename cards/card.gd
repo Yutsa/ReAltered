@@ -26,12 +26,13 @@ func _on_area_2d_mouse_exited():
 	mouse_over = false
 	$Area2D/CardImage.scale = Vector2(0.3, 0.3)
 
-func _unhandled_input(event: InputEvent):
-	if mouse_over and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+func _on_area_2d_input_event(viewport, event, shape_idx):
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		is_dragging = true
-		$Area2D/CardImage.scale = Vector2(0.15, 0.15)
-	elif mouse_over and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_released():
+	elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and (event.is_released() or not event.pressed):
 		is_dragging = false
 		$Area2D/CardImage.scale = Vector2(0.3, 0.3)
 	if is_dragging and event is InputEventMouseMotion:
+		if $Area2D/CardImage.scale.x != 0.15:
+			$Area2D/CardImage.scale = Vector2(0.15, 0.15)
 		position += event.relative
