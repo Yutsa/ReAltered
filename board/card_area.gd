@@ -1,27 +1,21 @@
 extends Area2D
 
-var mouse_over = false
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	set_process_unhandled_input(true)
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
-func _unhandled_input(event: InputEvent):
-	if mouse_over and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-		pass
-
-func _on_mouse_entered():
-	mouse_over = true
-
-
-func _on_mouse_exited():
-	mouse_over = false
-
+var card_on_board_scene = preload("res://board/card_on_board.tscn")
+var card_over_zone
 
 func _on_area_entered(area):
-	print("Something entered") # Replace with function body.
+	if area is Card:
+		card_over_zone = area
+
+func add_card_to_area(card_id):
+	var instance = card_on_board_scene.instantiate()
+	instance.card_id = card_id
+	print(instance.card_id)
+	$HBoxContainer.add_child(instance)
+
+func _on_input_event(viewport, event, shape_idx):
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT \
+	 and (event.is_released() or not event.pressed) and card_over_zone != null:
+		add_card_to_area(card_over_zone.card_id)
+		card_over_zone.queue_free()
+		card_over_zone = null

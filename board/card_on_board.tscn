@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://ppyuda2s4g5g"]
+
+[ext_resource type="Texture2D" uid="uid://i72jihcef61p" path="res://img/cards/card3.jpg" id="1_iqfow"]
+[ext_resource type="Script" path="res://board/card_on_board.gd" id="2_rxlqq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5q0n3"]
+size = Vector2(113, 157)
+
+[node name="CardOnBoard" type="TextureRect"]
+texture = ExtResource("1_iqfow")
+expand_mode = 3
+stretch_mode = 4
+script = ExtResource("2_rxlqq")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(56.5, 79.5)
+shape = SubResource("RectangleShape2D_5q0n3")
