@@ -6,16 +6,50 @@ var mouse_over = false
 var is_dragging = false
 var hovered_board_area = null
 var position_before_drag : Vector2
+var rotation_before_drag = null
+var show_zoom = false
 
 func _ready():
 	$CardImage.texture = load("res://img/cards/" + card_id + ".jpg")
+	
+func zoom():
+	if not show_zoom:
+		$CardImage.scale = Vector2(0.25, 0.25)
+		$CardImage.z_index = 1
+		$CardImage.position.y -= 100
+		show_zoom = true
+	
+func unzoom():
+	if show_zoom:
+		$CardImage.scale = Vector2(0.15, 0.15)
+		$CardImage.z_index = 0
+		$CardImage.position.y += 100
+		show_zoom = false
+		
+func drag_card():
+	is_dragging = true
+	position_before_drag = position
+	rotation_before_drag = rotation_degrees
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	unzoom()
+	rotation_degrees = 0
+	$CardImage.z_index = 2
+
+func drop_card():
+	is_dragging = false
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	if hovered_board_area == null:
+		position = position_before_drag
+		rotation_degrees = rotation_before_drag
+		$CardImage.z_index = 0
+	else:
+		hovered_board_area.add_card(self)
 
 func _on_area_2d_mouse_entered():
-	if is_dragging:
+	if is_dragging or Input.is_mouse_button_pressed(1):
 		return
 	Input.set_default_cursor_shape(Input.CURSOR_POINTING_HAND)
-	$CardImage.scale = Vector2(0.4, 0.4)
-	$CardImage.z_index = 1
+	zoom()
 	mouse_over = true
 
 func _on_area_2d_mouse_exited():
@@ -23,22 +57,13 @@ func _on_area_2d_mouse_exited():
 		return
 	Input.set_default_cursor_shape(Input.CURSOR_ARROW)
 	mouse_over = false
-	$CardImage.z_index = 0
-	$CardImage.scale = Vector2(0.3, 0.3)
+	unzoom()
 
 func _on_control_gui_input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-		is_dragging = true
-		position_before_drag = position
-		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-		$CardImage.scale = Vector2(0.3, 0.3)
+		drag_card()
 	elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and (event.is_released() or not event.pressed):
-		is_dragging = false
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		if hovered_board_area == null:
-			position = position_before_drag
-		else:
-			hovered_board_area.add_card(self)
+		drop_card()
 	if is_dragging and event is InputEventMouseMotion:
 		position += event.relative
 

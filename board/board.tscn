@@ -10,9 +10,9 @@ position = Vector2(576, 176)
 scale = Vector2(2, 2)
 
 [node name="Control" parent="." instance=ExtResource("2_jc1d2")]
-offset_left = 457.0
-offset_top = 615.0
-offset_right = 457.0
-offset_bottom = 615.0
+offset_left = 577.0
+offset_top = 566.0
+offset_right = 577.0
+offset_bottom = 566.0
 
 [connection signal="input_event" from="CardArea" to="CardArea" method="_on_input_event"]
