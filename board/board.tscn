@@ -1,25 +1,18 @@
 [gd_scene load_steps=3 format=3 uid="uid://cl8qdykvt8p1t"]
 
-[ext_resource type="PackedScene" uid="uid://df0emya7wdn4s" path="res://cards/card.tscn" id="1_dwcmn"]
 [ext_resource type="PackedScene" uid="uid://b0v1r7qbdbmf1" path="res://board/card_area.tscn" id="2_eywqk"]
+[ext_resource type="PackedScene" uid="uid://br7rtjmgtm30k" path="res://board/hand.tscn" id="2_jc1d2"]
 
 [node name="Board" type="Node2D"]
-
-[node name="Card" parent="." instance=ExtResource("1_dwcmn")]
-z_index = 1
-position = Vector2(296, 524)
-
-[node name="Card2" parent="." instance=ExtResource("1_dwcmn")]
-z_index = 1
-position = Vector2(587, 514)
-card_id = "card2"
-
-[node name="Card3" parent="." instance=ExtResource("1_dwcmn")]
-z_index = 1
-position = Vector2(851, 513)
 
 [node name="CardArea" parent="." instance=ExtResource("2_eywqk")]
 position = Vector2(576, 176)
 scale = Vector2(2, 2)
+
+[node name="Control" parent="." instance=ExtResource("2_jc1d2")]
+offset_left = 457.0
+offset_top = 615.0
+offset_right = 457.0
+offset_bottom = 615.0
 
 [connection signal="input_event" from="CardArea" to="CardArea" method="_on_input_event"]

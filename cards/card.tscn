@@ -6,8 +6,8 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j5i0y"]
 size = Vector2(222, 313)
 
-[node name="Area2D" type="Area2D"]
-position = Vector2(150, 182)
+[node name="Area2D" type="Area2D" groups=["card"]]
+position = Vector2(-1, 0)
 script = ExtResource("1_ivecl")
 metadata/_edit_group_ = true
 
@@ -19,6 +19,16 @@ texture = ExtResource("1_7d1ft")
 position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_j5i0y")
 
-[connection signal="input_event" from="." to="." method="_on_area_2d_input_event"]
-[connection signal="mouse_entered" from="." to="." method="_on_area_2d_mouse_entered"]
-[connection signal="mouse_exited" from="." to="." method="_on_area_2d_mouse_exited"]
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -112.0
+offset_top = -158.0
+offset_right = 112.0
+offset_bottom = 156.0
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]
+[connection signal="gui_input" from="Control" to="." method="_on_control_gui_input"]
+[connection signal="mouse_entered" from="Control" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Control" to="." method="_on_area_2d_mouse_exited"]
