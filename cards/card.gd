@@ -4,7 +4,7 @@ class_name Card
 @export var card_id = "card1"
 var mouse_over = false
 var is_dragging = false
-var hovered_board_area = null
+var hovered_board_area = []
 var position_before_drag : Vector2
 var rotation_before_drag = null
 var show_zoom = false
@@ -38,12 +38,12 @@ func drag_card():
 func drop_card():
 	is_dragging = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	if hovered_board_area == null:
+	if hovered_board_area.is_empty():
 		position = position_before_drag
 		rotation_degrees = rotation_before_drag
 		$CardImage.z_index = 0
 	else:
-		hovered_board_area.add_card(self)
+		hovered_board_area[0].add_card()
 
 func _on_area_2d_mouse_entered():
 	if is_dragging or Input.is_mouse_button_pressed(1):
@@ -70,9 +70,9 @@ func _on_control_gui_input(event):
 
 func _on_area_entered(area):
 	if (area.is_in_group("board_area")):
-		hovered_board_area = area
+		hovered_board_area.append(area)
 
 
 func _on_area_exited(area):
 	if (area.is_in_group("board_area")):
-		hovered_board_area = null
+		hovered_board_area.erase(area)

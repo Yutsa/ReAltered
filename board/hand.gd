@@ -7,8 +7,8 @@ func _ready():
 	for index in children.size():
 		var card = children[index]
 		card.position.x = center.x + (index * 100)
-		card.position.y = center.y + (index * 3)
-		card.rotation_degrees += index * 3
+		#card.position.y = center.y + (index * 3)
+		#card.rotation_degrees += index * 3
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
