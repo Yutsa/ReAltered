@@ -1,33 +1,39 @@
-[gd_scene load_steps=3 format=3 uid="uid://br7rtjmgtm30k"]
+[gd_scene load_steps=5 format=3 uid="uid://br7rtjmgtm30k"]
 
 [ext_resource type="Script" path="res://board/hand.gd" id="1_1eoco"]
-[ext_resource type="PackedScene" uid="uid://df0emya7wdn4s" path="res://cards/card.tscn" id="1_kcf8b"]
+
+[sub_resource type="Curve" id="Curve_8l3sp"]
+min_value = -1.0
+_data = [Vector2(0, -1), 0.0, 2.0, 0, 1, Vector2(1, 1), 2.0, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_a8vpq"]
+min_value = -1.0
+max_value = 0.0
+_data = [Vector2(0, -1), 0.0, 0.0, 0, 0, Vector2(0.5, 0), 0.0, 0.0, 0, 0, Vector2(1, -1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_4pxm5"]
+min_value = -1.0
+_data = [Vector2(0, 1), 0.0, -2.0, 0, 1, Vector2(1, -1), -2.0, 0.0, 1, 0]
+point_count = 2
 
 [node name="Control" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 592.0
-offset_top = 345.0
-offset_right = 592.0
-offset_bottom = 345.0
+offset_left = 500.0
+offset_top = 500.0
+offset_right = -1420.0
+offset_bottom = -580.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("1_1eoco")
+spread_curve = SubResource("Curve_8l3sp")
+height_curve = SubResource("Curve_a8vpq")
+rotation_curve = SubResource("Curve_4pxm5")
 
-[node name="Area2D" parent="." instance=ExtResource("1_kcf8b")]
-position = Vector2(0, 0)
-
-[node name="Area2D2" parent="." instance=ExtResource("1_kcf8b")]
-position = Vector2(0, 0)
-card_id = "card2"
-
-[node name="Area2D3" parent="." instance=ExtResource("1_kcf8b")]
-position = Vector2(0, 0)
-card_id = "card3"
-
-[node name="Area2D4" parent="." instance=ExtResource("1_kcf8b")]
-position = Vector2(0, 0)
+[connection signal="child_exiting_tree" from="." to="." method="_on_child_exiting_tree"]

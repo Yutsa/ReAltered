@@ -13,9 +13,7 @@ func add_card():
 
 func _on_area_entered(area):
 	if area.is_in_group("card"):
-		print("Add card")
 		card_to_drop = area
 
 func _on_area_exited(area):
-	print("Remove card")
 	card_to_drop = null
