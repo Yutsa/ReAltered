@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://df0emya7wdn4s"]
+[gd_scene load_steps=5 format=3 uid="uid://df0emya7wdn4s"]
 
 [ext_resource type="Texture2D" uid="uid://cc3sj3h0cqh84" path="res://img/cards/card1.jpg" id="1_7d1ft"]
 [ext_resource type="Script" path="res://cards/card.gd" id="1_ivecl"]
+[ext_resource type="Script" path="res://cards/card_logic.gd" id="3_4dpfa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j5i0y"]
 size = Vector2(111, 158)
@@ -26,6 +27,9 @@ offset_left = -56.0
 offset_top = -78.0
 offset_right = 56.0
 offset_bottom = 78.0
+
+[node name="Node" type="Node" parent="."]
+script = ExtResource("3_4dpfa")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="area_exited" from="." to="." method="_on_area_exited"]
