@@ -1,7 +1,7 @@
 extends Node2D
 class_name Card
 	
-@export var card_id = "ALT_CORE_B_OR_09_R1"
+@export var card_id = "ALT_CORE_B_AX_18_C"
 var mouse_over = false
 var is_dragging = false
 var hovered_board_area = []
@@ -10,27 +10,13 @@ var rotation_before_drag = null
 var show_zoom = false
 
 func _ready():
-	#$HTTPRequest.request_completed.connect(load_texture)
-	#$HTTPRequest.request($CardLogic.get_card_image_url())
-	var url = $CardLogic.get_card_image_url()
-	var http_request = $HTTPRequest
-	http_request.request_completed.connect(self.load_texture)
-
-	var error = http_request.request(url)
-	if error != OK:
-		push_error("An error occurred in the HTTP request.")
-
-func load_texture(result, response_code, headers, body):
-	if result != HTTPRequest.RESULT_SUCCESS:
-		push_error("Image couldn't be downloaded. Try a different image.")
-
-	var image = Image.new()
-	var error = image.load_jpg_from_buffer(body)
-	if error != OK:
-		push_error("Couldn't load the image.")
-
-	var texture = ImageTexture.create_from_image(image)
-	$CardImage.texture = texture
+	var card_logic = CardLogic.new()
+	card_logic.card_id = card_id
+	add_child(card_logic)
+	var texture_loader = TextureLoader.new()
+	add_child(texture_loader)
+	texture_loader.texture_loaded.connect(func (texture): $CardImage.texture = texture)
+	texture_loader.load_texture(card_logic.get_card_image_url())
 	
 func zoom():
 	if not show_zoom:

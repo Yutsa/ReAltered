@@ -1,7 +1,8 @@
 extends Node
+class_name CardLogic
 
-@export var card_id = "ALT_CORE_B_OR_09_R1"
-var card_data = CardsData.get_card_data(card_id)
+var card_id : String
+var card_data = null
 var ocean_power = 0
 var mountain_power = 0
 var forest_power = 0
@@ -10,13 +11,12 @@ var reserve_cost = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	card_data = CardsData.get_card_data(card_id)
 	ocean_power = card_data.elements.OCEAN_POWER
 	mountain_power = card_data.elements.MOUNTAIN_POWER
 	forest_power = card_data.elements.FOREST_POWER
 	main_cost = card_data.elements.MAIN_COST
 	reserve_cost = card_data.elements.RECALL_COST
-	print(get_card_image_url())
-	print(get_card_art())
 
 func get_card_image_url(lang='fr'):
 	return card_data.imagePath[lang]

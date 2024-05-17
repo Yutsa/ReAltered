@@ -10,10 +10,12 @@ const ROTATION_CONSTANT = -0.3
 
 const CARD = preload("res://cards/card.tscn")
 
+const sample_cards = ["ALT_CORE_B_AX_08_C", "ALT_CORE_B_AX_07_C", "ALT_CORE_B_AX_10_C", "ALT_CORE_B_AX_11_R1", "ALT_CORE_B_AX_12_R2"]
+
 func _ready():
-	for i in 6:
+	for i in 5:
 		var card = CARD.instantiate()
-		card.card_id = "card" + str((i % 3) + 1) 
+		card.card_id = sample_cards[i]
 		card.tree_exited.connect(spread_cards)
 		add_child(card)
 	spread_cards()
