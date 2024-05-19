@@ -1,3 +1,4 @@
+
 extends Control
 
 @export var spread_curve: Curve
