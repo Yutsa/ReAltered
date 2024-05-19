@@ -38,6 +38,8 @@ func get_card_image_path(directory: String):
 	
 func load_card_image_from_file(directory: String):
 	var image = Image.load_from_file(get_card_image_path(directory))
+	if directory == CARD_ART_PIC_DIRECTORY:
+		image.crop(700, 800)
 	texture_loaded.emit(ImageTexture.create_from_image(image))
 
 func load_card_image_from_network(directory: String, url: String):

@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cl8qdykvt8p1t"]
+[gd_scene load_steps=4 format=3 uid="uid://cl8qdykvt8p1t"]
 
 [ext_resource type="Script" path="res://board/board.gd" id="1_kfu73"]
 [ext_resource type="PackedScene" uid="uid://b0v1r7qbdbmf1" path="res://board/card_area.tscn" id="2_eywqk"]
 [ext_resource type="PackedScene" uid="uid://br7rtjmgtm30k" path="res://board/hand.tscn" id="2_jc1d2"]
-[ext_resource type="PackedScene" uid="uid://ppyuda2s4g5g" path="res://board/card_on_board.tscn" id="3_du5kr"]
 
 [node name="Board" type="Node2D"]
 script = ExtResource("1_kfu73")
@@ -37,9 +36,6 @@ metadata/_edit_group_ = true
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="CardOnBoard" parent="Reserve/HBoxContainer" instance=ExtResource("3_du5kr")]
-layout_mode = 2
-
 [node name="Permanent" type="PanelContainer" parent="."]
 offset_left = 1430.0
 offset_top = 725.0
@@ -50,9 +46,6 @@ metadata/_edit_group_ = true
 [node name="HBoxContainer" type="HBoxContainer" parent="Permanent"]
 layout_mode = 2
 theme_override_constants/separation = 0
-
-[node name="CardOnBoard" parent="Permanent/HBoxContainer" instance=ExtResource("3_du5kr")]
-layout_mode = 2
 
 [connection signal="area_exited" from="CardArea" to="CardArea" method="_on_area_exited"]
 [connection signal="input_event" from="CardArea2" to="CardArea2" method="_on_input_event"]
