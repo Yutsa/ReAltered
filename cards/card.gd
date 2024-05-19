@@ -14,9 +14,10 @@ func _ready():
 	card_logic.card_id = card_id
 	add_child(card_logic)
 	var texture_loader = TextureLoader.new()
+	texture_loader.card = card_logic
 	add_child(texture_loader)
 	texture_loader.texture_loaded.connect(func (texture): $CardImage.texture = texture)
-	texture_loader.load_texture(card_logic.get_card_image_url())
+	texture_loader.load_card_texture()
 	
 func zoom():
 	if not show_zoom:
