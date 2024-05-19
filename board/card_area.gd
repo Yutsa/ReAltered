@@ -2,18 +2,10 @@ extends Area2D
 
 var card_on_board_scene = preload("res://board/card_on_board.tscn")
 var card_to_drop = null
+@export var type : CardAreaLogic.Card_Area
 	
-func add_card():
-	if card_to_drop.is_in_group("card"):
-		var instance = card_on_board_scene.instantiate()
-		instance.card_id = card_to_drop.card_id
-		$HBoxContainer.add_child(instance)
-		card_to_drop.queue_free()
-
-
-func _on_area_entered(area):
-	if area.is_in_group("card"):
-		card_to_drop = area
-
-func _on_area_exited(area):
-	card_to_drop = null
+func add_card(card: Card):
+	var instance = card_on_board_scene.instantiate()
+	instance.init(card.card_logic)
+	$HBoxContainer.add_child(instance)
+	card.queue_free()

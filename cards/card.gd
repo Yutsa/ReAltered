@@ -1,17 +1,19 @@
 extends Node2D
 class_name Card
-	
-@export var card_id = "ALT_CORE_B_AX_18_C"
+
 var mouse_over = false
 var is_dragging = false
 var hovered_board_area = []
 var position_before_drag : Vector2
 var rotation_before_drag = null
 var show_zoom = false
+var card_logic : CardLogic = null
+
+func init(card_id: String):
+	card_logic = CardLogic.new()
+	card_logic.card_id = card_id
 
 func _ready():
-	var card_logic = CardLogic.new()
-	card_logic.card_id = card_id
 	add_child(card_logic)
 	var texture_loader = TextureLoader.new()
 	texture_loader.card = card_logic
@@ -50,7 +52,7 @@ func drop_card():
 		rotation_degrees = rotation_before_drag
 		$CardImage.z_index = 0
 	else:
-		hovered_board_area[0].add_card()
+		hovered_board_area[0].add_card(self)
 
 func _on_area_2d_mouse_entered():
 	if is_dragging or Input.is_mouse_button_pressed(1):

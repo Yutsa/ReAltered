@@ -16,7 +16,7 @@ const sample_cards = ["ALT_CORE_B_AX_08_C", "ALT_CORE_B_AX_07_C", "ALT_CORE_B_AX
 func _ready():
 	for i in 5:
 		var card = CARD.instantiate()
-		card.card_id = sample_cards[i]
+		card.init(sample_cards[i])
 		card.tree_exited.connect(spread_cards)
 		add_child(card)
 	spread_cards()
